@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Tutorials\\microservicesTutorial\\PlatformService\\PlatformService.csproj": {}
+    "C:\\Tutorials\\MicroservicesTutorial\\PlatformService\\PlatformService.csproj": {}
   },
   "projects": {
-    "C:\\Tutorials\\microservicesTutorial\\PlatformService\\PlatformService.csproj": {
+    "C:\\Tutorials\\MicroservicesTutorial\\PlatformService\\PlatformService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Tutorials\\microservicesTutorial\\PlatformService\\PlatformService.csproj",
+        "projectUniqueName": "C:\\Tutorials\\MicroservicesTutorial\\PlatformService\\PlatformService.csproj",
         "projectName": "PlatformService",
-        "projectPath": "C:\\Tutorials\\microservicesTutorial\\PlatformService\\PlatformService.csproj",
-        "packagesPath": "C:\\Users\\sands\\.nuget\\packages\\",
-        "outputPath": "C:\\Tutorials\\microservicesTutorial\\PlatformService\\obj\\",
+        "projectPath": "C:\\Tutorials\\MicroservicesTutorial\\PlatformService\\PlatformService.csproj",
+        "packagesPath": "C:\\Users\\sebsan\\.nuget\\packages\\",
+        "outputPath": "C:\\Tutorials\\MicroservicesTutorial\\PlatformService\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\sands\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\sebsan\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -77,16 +77,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.NETCore.App.Host.win-x64",
-              "version": "[6.0.1, 6.0.1]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[6.0.1, 6.0.1]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -95,7 +85,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }
