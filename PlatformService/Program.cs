@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 using PlatformService.Models;
 using Microsoft.AspNetCore.Mvc;
 using PlatformService.SyncDataServices.Http;
+using PlatformService.AsyncDataServices;
+using PlatformService.SyncDataServices.Grpc;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,9 +34,12 @@ builder.Services.AddControllers(
       }
 );
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddGrpc();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddSingleton<IMessageBusClient, MessageBusClient>();
 builder.Services.AddScoped<IPlatformRepo, PlatformRepo>();
 builder.Services.AddHttpClient<ICommandDataClient, HttpCommandDataClient>();
 System.Console.WriteLine($"--> CommandService Endpoint {builder.Configuration["CommandService"]}");
@@ -78,13 +83,15 @@ async Task<IResult> CreatePlatform(
         IMapper mapper,
         LinkGenerator linker,
         HttpContext httpContext,
-        ICommandDataClient commandDataClient)
+        ICommandDataClient commandDataClient,
+        IMessageBusClient messageBusClient)
 {
     var platform = mapper.Map<Platform>(platformCreateDto);
     await repo.CreatePlatform(platform);
     await repo.SaveChanges();
     var platformReadDto = mapper.Map<PlatformReadDto>(platform);
 
+    // Send sync message
     try
     {
         await commandDataClient.SendPlatformToCommand(platformReadDto);
@@ -92,6 +99,18 @@ async Task<IResult> CreatePlatform(
     catch (Exception ex)
     {
         System.Console.WriteLine($"--> Could not send synchronously: {ex.Message}");
+    }
+
+    // Send async message
+    try
+    {
+        var platformPublishedDto = mapper.Map<PlatformPublishedDto>(platformReadDto);
+        platformPublishedDto.Event = "Platform_Published";
+        messageBusClient.PublishNewPlatform(platformPublishedDto);
+    }
+    catch (Exception ex)
+    {
+        System.Console.WriteLine($"--> Could not send asynchronously: {ex.Message}");
     }
 
     return Results.Created(linker.GetUriByName(httpContext, "GetPlatformById", new { id = platformReadDto.Id })!, platformReadDto);
@@ -110,6 +129,11 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapGrpcService<GrpcPlatformService>();
+app.MapGet("/protos/platforms.proto", async context => {
+    await context.Response.WriteAsync(File.ReadAllText("Protos/platforms.proto"));
+});
+
 PrepDb.PrepPopulation(app, app.Environment.IsProduction());
 
 

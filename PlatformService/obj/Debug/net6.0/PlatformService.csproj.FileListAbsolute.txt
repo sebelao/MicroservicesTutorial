@@ -62,3 +62,11 @@ C:\Tutorials\microservicesTutorial\PlatformService\obj\Debug\net6.0\ref\Platform
 C:\Tutorials\microservicesTutorial\PlatformService\obj\Debug\net6.0\PlatformService.pdb
 C:\Tutorials\microservicesTutorial\PlatformService\obj\Debug\net6.0\PlatformService.genruntimeconfig.cache
 C:\Tutorials\MicroservicesTutorial\PlatformService\bin\Debug\net6.0\appsettings.Production.json
+C:\Tutorials\MicroservicesTutorial\PlatformService\bin\Debug\net6.0\RabbitMQ.Client.dll
+C:\Tutorials\MicroservicesTutorial\PlatformService\bin\Debug\net6.0\Google.Protobuf.dll
+C:\Tutorials\MicroservicesTutorial\PlatformService\bin\Debug\net6.0\Grpc.AspNetCore.Server.dll
+C:\Tutorials\MicroservicesTutorial\PlatformService\bin\Debug\net6.0\Grpc.AspNetCore.Server.ClientFactory.dll
+C:\Tutorials\MicroservicesTutorial\PlatformService\bin\Debug\net6.0\Grpc.Core.Api.dll
+C:\Tutorials\MicroservicesTutorial\PlatformService\bin\Debug\net6.0\Grpc.Net.Client.dll
+C:\Tutorials\MicroservicesTutorial\PlatformService\bin\Debug\net6.0\Grpc.Net.ClientFactory.dll
+C:\Tutorials\MicroservicesTutorial\PlatformService\bin\Debug\net6.0\Grpc.Net.Common.dll
