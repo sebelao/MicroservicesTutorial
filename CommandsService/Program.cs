@@ -1,22 +1,26 @@
+using CommandsService.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+builder.Services.AddDbContext<AppDbContext>(opt => opt.UseInMemoryDatabase("InMem"));
+builder.Services.AddScoped<ICommandRepo, CommandRepo>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
 
-app.MapPost("api/c/platforms", TestInboundConnection);
+// app.MapPost("api/c/platforms", TestInboundConnection);
 
-IResult TestInboundConnection() {
-    System.Console.WriteLine("--> Inbound POST # Command Service");
-    return Results.Ok("Inbound test of from Platforms Controller");
-}
+// IResult TestInboundConnection() {
+//     System.Console.WriteLine("--> Inbound POST # Command Service");
+//     return Results.Ok("Inbound test of from Platforms Controller");
+// }
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
